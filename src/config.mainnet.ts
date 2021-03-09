@@ -52,10 +52,8 @@ const networkSchema = object({
 
 export type NetworkType = InferType<typeof networkSchema>;
 
-networks.forEach(network => {
-  networkSchema.validate(network, { strict: true }).catch(({ errors }) => {
-    console.error(`Config invalid format for ${network.id}`, errors);
-  });
+networkSchema.validate(network, { strict: true }).catch(({ errors }) => {
+  console.error(`Config invalid format for ${network.id}`, errors);
 });
 
 export const delegationContractData: DelegationContractType[] = [

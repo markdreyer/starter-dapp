@@ -1,15 +1,13 @@
-import BigNumber from 'bignumber.js';
 import { useDelegationManager } from 'helpers';
 import React, { useState } from 'react';
-import nominate from 'helpers/nominate';
 import NewDelegationContractModal from './NewDelegationContractModal';
 
 const NewDelegationContractAction = () => {
   const { delegationManager } = useDelegationManager();
   const [showNewDelegationContractModal, setShowNewDelegationContractModal] = useState(false);
 
-  const handleSubmit = (args: string) => {
-    delegationManager.sendTransaction(args.split('@')[0], 'createNewDelegationContract', `${args.split('@')[1]}@${args.split('@')[2]}`).then();
+  const handleSubmit = (amount: string) => {
+    delegationManager.sendTransaction(amount, 'createNewDelegationContract', '00@0e').then();
   };
 
   return (
@@ -18,7 +16,7 @@ const NewDelegationContractAction = () => {
         onClick={() => setShowNewDelegationContractModal(true)}
         className="btn btn-primary btn-sm text-white mr-n1"
       >
-        New DM Contract
+        New Contract
       </button>
       <NewDelegationContractModal
         show={showNewDelegationContractModal}

@@ -36,23 +36,9 @@ const NewDelegationContractModal = ({
                 showLastNonZeroDecimal: false,
                 addCommas: false,
               }),
-              cap: denominate({
-                input: '0',
-                denomination,
-                decimals,
-                showLastNonZeroDecimal: false,
-                addCommas: false,
-              }),
-              serviceFee: denominate({
-                input: '0',
-                denomination,
-                decimals,
-                showLastNonZeroDecimal: false,
-                addCommas: false,
-              }),
             }}
             onSubmit={(values) => {
-              handleContinue(`${values.amount}@${values.cap}@${values.serviceFee}`);
+              handleContinue(`${values.amount}`);
             }}
           >
             {(props) => {
@@ -72,38 +58,6 @@ const NewDelegationContractModal = ({
                       min="0"
                       step="any"
                       value={values.amount}
-                      autoComplete="off"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <label htmlFor="cap">Cap (10000000000000000000000)</label>
-                    <input
-                      type="number"
-                      className={`form-control ${errors.cap && touched.cap ? 'is-invalid' : ''
-                        }`}
-                      id="cap"
-                      name="cap"
-                      data-testid="cap"
-                      required={true}
-                      min="0"
-                      step="any"
-                      value={values.cap}
-                      autoComplete="off"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <label htmlFor="serviceFee">Service Fee (2000)</label>
-                    <input
-                      type="number"
-                      className={`form-control ${errors.serviceFee && touched.serviceFee ? 'is-invalid' : ''
-                        }`}
-                      id="serviceFee"
-                      name="serviceFee"
-                      data-testid="serviceFee"
-                      required={true}
-                      min="0"
-                      step="any"
-                      value={values.serviceFee}
                       autoComplete="off"
                       onChange={handleChange}
                       onBlur={handleBlur}

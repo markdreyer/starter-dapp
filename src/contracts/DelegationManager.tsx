@@ -14,7 +14,7 @@ import {
 import { setItem } from '../storage/session';
 import { delegationManagerContractData } from '../config';
 
-export default class DelegationManager {
+class DelegationManager {
     contract: SmartContract;
     proxyProvider: ProxyProvider;
     signerProvider?: IDappProvider;
@@ -82,3 +82,5 @@ export default class DelegationManager {
         }
     }
 }
+
+export { DelegationManager }

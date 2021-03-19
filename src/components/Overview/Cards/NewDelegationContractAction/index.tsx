@@ -9,20 +9,7 @@ const NewDelegationContractAction = () => {
   const [showNewDelegationContractModal, setShowNewDelegationContractModal] = useState(false);
 
   const handleSubmit = (args: string) => {
-    const cap = args.split('@')[0],
-      serviceFee = args.split('@')[1];
-    const hexCap = toHex(cap);
-    const hexServiceFee = toHex(serviceFee);
-    delegationManager.sendTransaction('1250000000000000000000', 'createNewDelegationContract', `${hexCap}@${hexServiceFee}`).then();
-  };
-
-  const toHex = (value: string) => {
-    let val = value && value.length > 0 ? new BigNumber(nominate(value)).toString(16) : '0';
-
-    if (val.length % 2 !== 0) {
-      val = '0' + val;
-    }
-    return val;
+    delegationManager.sendTransaction(args.split('@')[0], 'createNewDelegationContract', `${args.split('@')[1]}@${args.split('@')[2]}`).then();
   };
 
   return (
@@ -31,7 +18,7 @@ const NewDelegationContractAction = () => {
         onClick={() => setShowNewDelegationContractModal(true)}
         className="btn btn-primary btn-sm text-white mr-n1"
       >
-        Change
+        New DM Contract
       </button>
       <NewDelegationContractModal
         show={showNewDelegationContractModal}

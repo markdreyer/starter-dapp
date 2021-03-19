@@ -10,7 +10,6 @@ import SetPercentageFeeAction from './SetPercentageFeeAction';
 import UpdateDelegationCapAction from './UpdateDelegationCapAction';
 import AutomaticActivationAction from './AutomaticActivationAction';
 import ReDelegateCapActivationAction from './ReDelegateCapActivationAction';
-import NewDelegationContractAction from './NewDelegationContractAction';
 
 const Views = () => {
   const {
@@ -112,8 +111,6 @@ const Views = () => {
       >
         {location.pathname === '/owner' && <SetPercentageFeeAction />}
       </StatCard>
-
-      <NewDelegationContractAction />
 
       {isAdmin() && location.pathname === '/owner' ? (
         <StatCard

@@ -29,6 +29,13 @@ const NewDelegationContractModal = ({
           </p>
           <Formik
             initialValues={{
+              amount: denominate({
+                input: '0',
+                denomination,
+                decimals,
+                showLastNonZeroDecimal: false,
+                addCommas: false,
+              }),
               cap: denominate({
                 input: '0',
                 denomination,
@@ -45,7 +52,7 @@ const NewDelegationContractModal = ({
               }),
             }}
             onSubmit={(values) => {
-              handleContinue(`${values.cap}@${values.serviceFee}`);
+              handleContinue(`${values.amount}@${values.cap}@${values.serviceFee}`);
             }}
           >
             {(props) => {
@@ -53,7 +60,23 @@ const NewDelegationContractModal = ({
               return (
                 <form onSubmit={handleSubmit} className="text-left">
                   <div className="form-group mb-spacer">
-                    <label htmlFor="cap">{description}</label>
+                    <label htmlFor="amount">Amount</label>
+                    <input
+                      type="number"
+                      className={`form-control ${errors.amount && touched.amount ? 'is-invalid' : ''
+                        }`}
+                      id="amount"
+                      name="amount"
+                      data-testid="amount"
+                      required={true}
+                      min="0"
+                      step="any"
+                      value={values.amount}
+                      autoComplete="off"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <label htmlFor="cap">Cap (10000000000000000000000)</label>
                     <input
                       type="number"
                       className={`form-control ${errors.cap && touched.cap ? 'is-invalid' : ''
@@ -69,7 +92,7 @@ const NewDelegationContractModal = ({
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    <label htmlFor="serviceFee">Service Fee</label>
+                    <label htmlFor="serviceFee">Service Fee (2000)</label>
                     <input
                       type="number"
                       className={`form-control ${errors.serviceFee && touched.serviceFee ? 'is-invalid' : ''

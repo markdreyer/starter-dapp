@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Address } from '@elrondnetwork/erdjs/out';
 import { useContext } from 'context';
 import SetAgencyMetaDataModal from './SetAgencyMetaDataModal';
+import NewDelegationContractAction from '../Cards/NewDelegationContractAction';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -20,6 +21,9 @@ const Header = () => {
         <span className="text-truncate">{delegationContract}</span>
       </div>
       <div className="d-flex justify-content-center align-items-center justify-content-between">
+
+        <NewDelegationContractAction />
+
         {isAdmin() && pathname !== '/owner' ? (
           <Link to="/owner" className="btn btn-primary btn-sm">
             Admin

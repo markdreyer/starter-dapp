@@ -61,7 +61,7 @@ networkSchema.validate(network, { strict: true }).catch(({ errors }) => {
 export const delegationManagerContractData: DelegationManagerContractType[] = [
   {
     name: 'createNewDelegationContract',
-    gasLimit: 6000000,
+    gasLimit: 60000000,
     data: 'createNewDelegationContract@',
   }
 ];

@@ -36,11 +36,3 @@ export interface ActionModalType {
   handleClose: () => void;
   handleContinue: (value: string) => void;
 }
-export interface ActionModalType2 {
-  balance?: string;
-  show: boolean;
-  title: string;
-  description: string;
-  handleClose: () => void;
-  handleContinue: (value1: string, value2: string) => void;
-}

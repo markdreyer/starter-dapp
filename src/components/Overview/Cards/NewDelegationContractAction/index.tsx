@@ -8,10 +8,12 @@ const NewDelegationContractAction = () => {
   const { delegationManager } = useDelegationManager();
   const [showNewDelegationContractModal, setShowNewDelegationContractModal] = useState(false);
 
-  const handleSubmit = (cap: string, serviceFee: string) => {
+  const handleSubmit = (args: string) => {
+    const cap = args.split('@')[0],
+      serviceFee = args.split('@')[1];
     const hexCap = toHex(cap);
     const hexServiceFee = toHex(serviceFee);
-    delegationManager.sendTransaction('1250000000000000000000', 'createNewDelegationContract', hexCap, hexServiceFee).then();
+    delegationManager.sendTransaction('1250000000000000000000', 'createNewDelegationContract', `${hexCap}@${hexServiceFee}`).then();
   };
 
   const toHex = (value: string) => {

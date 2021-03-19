@@ -5,7 +5,7 @@ import { ErrorMessage, Formik } from 'formik';
 import BigNumber from 'bignumber.js';
 import { object, number } from 'yup';
 import denominate from 'components/Denominate/formatters';
-import { ActionModalType2 } from 'helpers/types';
+import { ActionModalType } from 'helpers/types';
 import { denomination, decimals } from 'config';
 
 const NewDelegationContractModal = ({
@@ -14,7 +14,7 @@ const NewDelegationContractModal = ({
   description,
   handleClose,
   handleContinue,
-}: ActionModalType2) => {
+}: ActionModalType) => {
 
 
   return (
@@ -45,7 +45,7 @@ const NewDelegationContractModal = ({
               }),
             }}
             onSubmit={(values) => {
-              handleContinue(values.cap.toString(), values.serviceFee.toString());
+              handleContinue(`${values.cap}@${values.serviceFee}`);
             }}
           >
             {(props) => {

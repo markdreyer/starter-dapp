@@ -83,4 +83,4 @@ class DelegationManager {
     }
 }
 
-export { DelegationManager }
+export { DelegationManager };

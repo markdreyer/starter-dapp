@@ -82,4 +82,4 @@ class Delegation {
     }
   }
 }
-export { Delegation }
+export { Delegation };

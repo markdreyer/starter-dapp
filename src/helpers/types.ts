@@ -5,6 +5,12 @@ export interface AccountType {
   code?: string;
 }
 
+export interface DelegationManagerContractType {
+  name: string;
+  gasLimit: number;
+  data: string;
+}
+
 export interface DelegationContractType {
   name: string;
   gasLimit: number;
@@ -29,4 +35,12 @@ export interface ActionModalType {
   description: string;
   handleClose: () => void;
   handleContinue: (value: string) => void;
+}
+export interface ActionModalType2 {
+  balance?: string;
+  show: boolean;
+  title: string;
+  description: string;
+  handleClose: () => void;
+  handleContinue: (value1: string, value2: string) => void;
 }

@@ -1,4 +1,5 @@
 import useDelegation from './useDelegation';
+import useDelegationManager from './useDelegationManager';
 import * as decodePem from './decodePem';
 import entireBalance from './entireBalance';
 import * as nominate from './nominate';
@@ -8,4 +9,4 @@ export { decodePem };
 export { entireBalance };
 export { nominate };
 export { types };
-export { useDelegation };
+export { useDelegation, useDelegationManager };

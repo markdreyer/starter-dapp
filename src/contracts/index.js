@@ -1,1 +1,2 @@
-export { default as Delegation } from './Delegation';
+export { Delegation } from './Delegation';
+export { DelegationManager } from './DelegationManager';

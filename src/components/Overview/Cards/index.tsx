@@ -10,6 +10,7 @@ import SetPercentageFeeAction from './SetPercentageFeeAction';
 import UpdateDelegationCapAction from './UpdateDelegationCapAction';
 import AutomaticActivationAction from './AutomaticActivationAction';
 import ReDelegateCapActivationAction from './ReDelegateCapActivationAction';
+import NewDelegationContractAction from './NewDelegationContractAction';
 
 const Views = () => {
   const {
@@ -111,6 +112,9 @@ const Views = () => {
       >
         {location.pathname === '/owner' && <SetPercentageFeeAction />}
       </StatCard>
+
+      <NewDelegationContractAction />
+
       {isAdmin() && location.pathname === '/owner' ? (
         <StatCard
           title="Delegation Cap"
@@ -143,48 +147,48 @@ const Views = () => {
           <UpdateDelegationCapAction />
         </StatCard>
       ) : (
-        denominate({
-          decimals,
-          denomination,
-          input: contractOverview.maxDelegationCap,
-          showLastNonZeroDecimal: false,
-        }) !== '0' &&
-        denominate({
-          decimals,
-          denomination,
-          input: contractOverview.maxDelegationCap,
-          showLastNonZeroDecimal: false,
-        }) !== '' && (
-          <StatCard
-            title="Delegation Cap"
-            value={
-              denominate({
-                decimals,
-                denomination,
-                input: contractOverview.maxDelegationCap,
-                showLastNonZeroDecimal: false,
-              }) || ''
-            }
-            valueUnit={egldLabel}
-            color="green"
-            svg="delegation.svg"
-            percentage={`${getPercentage(
-              denominate({
-                input: totalActiveStake,
-                denomination,
-                decimals,
-                showLastNonZeroDecimal: false,
-              }),
-              denominate({
-                decimals,
-                denomination,
-                input: contractOverview.maxDelegationCap,
-                showLastNonZeroDecimal: false,
-              })
-            )}% filled`}
-          ></StatCard>
-        )
-      )}
+          denominate({
+            decimals,
+            denomination,
+            input: contractOverview.maxDelegationCap,
+            showLastNonZeroDecimal: false,
+          }) !== '0' &&
+          denominate({
+            decimals,
+            denomination,
+            input: contractOverview.maxDelegationCap,
+            showLastNonZeroDecimal: false,
+          }) !== '' && (
+            <StatCard
+              title="Delegation Cap"
+              value={
+                denominate({
+                  decimals,
+                  denomination,
+                  input: contractOverview.maxDelegationCap,
+                  showLastNonZeroDecimal: false,
+                }) || ''
+              }
+              valueUnit={egldLabel}
+              color="green"
+              svg="delegation.svg"
+              percentage={`${getPercentage(
+                denominate({
+                  input: totalActiveStake,
+                  denomination,
+                  decimals,
+                  showLastNonZeroDecimal: false,
+                }),
+                denominate({
+                  decimals,
+                  denomination,
+                  input: contractOverview.maxDelegationCap,
+                  showLastNonZeroDecimal: false,
+                })
+              )}% filled`}
+            ></StatCard>
+          )
+        )}
 
       {isAdmin() && location.pathname === '/owner' && (
         <StatCard

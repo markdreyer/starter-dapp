@@ -1,5 +1,5 @@
 import { object, string, boolean, InferType } from 'yup';
-import { DelegationContractType } from './helpers/types';
+import { DelegationManagerContractType, DelegationContractType } from './helpers/types';
 
 export const decimals: number = 2;
 export const denomination: number = 18;
@@ -21,6 +21,8 @@ export const auctionContract: string =
   'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqplllst77y4l';
 export const stakingContract: string =
   'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqllls0lczs7';
+export const delegationManagerContract: string =
+  'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqylllslmq6y6';
 
 export const network: NetworkType = {
   id: 'mainnet',
@@ -30,7 +32,7 @@ export const network: NetworkType = {
   apiAddress: 'https://api.elrond.com',
   gatewayAddress: 'https://gateway.elrond.com',
   explorerAddress: 'https://explorer.elrond.com/',
-  delegationContract: 'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqhllllsajxzat',
+  delegationContract: '',
 };
 
 const networkSchema = object({
@@ -56,12 +58,15 @@ networkSchema.validate(network, { strict: true }).catch(({ errors }) => {
   console.error(`Config invalid format for ${network.id}`, errors);
 });
 
-export const delegationContractData: DelegationContractType[] = [
+export const delegationManagerContractData: DelegationManagerContractType[] = [
   {
     name: 'createNewDelegationContract',
     gasLimit: 6000000,
     data: 'createNewDelegationContract@',
-  },
+  }
+];
+
+export const delegationContractData: DelegationContractType[] = [
   {
     name: 'setAutomaticActivation',
     gasLimit: 6000000,

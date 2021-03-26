@@ -108,7 +108,6 @@ const Views = () => {
       >
         {location.pathname === '/owner' && <SetPercentageFeeAction />}
       </StatCard>
-
       {isAdmin() && location.pathname === '/owner' ? (
         <StatCard
           title="Delegation Cap"
@@ -175,6 +174,7 @@ const Views = () => {
           ></StatCard>
         )
       )}
+
       {isAdmin() && location.pathname === '/owner' && (
         <StatCard
           title="Automatic activation"

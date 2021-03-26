@@ -32,19 +32,11 @@ export const network: NetworkType = {
   id: 'testnet',
   name: 'Testnet',
   egldLabel: 'xEGLD',
-<<<<<<< HEAD:src/config.testnet.ts
   walletAddress: 'https://testnet-wallet.elrond.com/dapp/init',
   apiAddress: 'https://testnet-api.elrond.com',
   gatewayAddress: 'https://testnet-gateway.elrond.com',
   explorerAddress: 'https://testnet-explorer.elrond.com/',
   delegationContract: 'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqf8llllswuedva',
-=======
-  walletAddress: 'https://devnet-wallet.elrond.com/dapp/init',
-  apiAddress: 'https://devnet-api.elrond.com',
-  gatewayAddress: 'https://devnet-gateway.elrond.com',
-  explorerAddress: 'http://devnet-explorer.elrond.com/',
-  delegationContract: 'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqp8lllls9jsunl',
->>>>>>> upstream/master:react-delegationdashboard/src/config.devnet.ts
 };
 
 const networkSchema = object({

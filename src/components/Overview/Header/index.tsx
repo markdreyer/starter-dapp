@@ -3,11 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { Address } from '@elrondnetwork/erdjs/out';
 import { useContext, useDispatch } from 'context';
 import SetAgencyMetaDataModal from './SetAgencyMetaDataModal';
-<<<<<<< HEAD:src/components/Overview/Header/index.tsx
 import NewDelegationContractAction from '../Cards/NewDelegationContractAction';
-=======
 import { getItem } from 'storage/session';
->>>>>>> upstream/master:react-delegationdashboard/src/components/Overview/Header/index.tsx
 
 const Header = () => {
   const { pathname } = useLocation();

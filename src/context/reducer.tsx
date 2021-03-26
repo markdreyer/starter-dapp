@@ -5,17 +5,20 @@ export type DispatchType = (action: ActionType) => void;
 
 export type ActionType =
   | { type: 'login'; address: StateType['address'] }
+  | { type: 'ledgerLogin'; ledgerLogin: StateType['ledgerLogin'] }
   | { type: 'logout'; provider: StateType['dapp']['provider'] }
   | { type: 'loading'; loading: StateType['loading'] }
   | { type: 'setProvider'; provider: StateType['dapp']['provider'] }
-  | { type: 'setBalance'; balance: StateType['account']['balance'] }
+  | { type: 'setAccount'; account: StateType['account'] }
   | { type: 'setContractOverview'; contractOverview: StateType['contractOverview'] }
   | { type: 'setNetworkConfig'; networkConfig: StateType['networkConfig'] }
   | { type: 'setAgencyMetaData'; agencyMetaData: StateType['agencyMetaData'] }
   | { type: 'setNumberOfActiveNodes'; numberOfActiveNodes: StateType['numberOfActiveNodes'] }
   | { type: 'setNumUsers'; numUsers: StateType['numUsers'] }
+  | { type: 'setMinDelegationAmount'; minDelegationAmount: StateType['minDelegationAmount'] }
   | { type: 'setTotalActiveStake'; totalActiveStake: StateType['totalActiveStake'] }
-  | { type: 'setAprPercentage'; aprPercentage: StateType['aprPercentage'] };
+  | { type: 'setAprPercentage'; aprPercentage: StateType['aprPercentage'] }
+  | { type: 'setLedgerAccount'; ledgerAccount: StateType['ledgerAccount'] };
 
 export function reducer(state: StateType, action: ActionType): StateType {
   switch (action.type) {
@@ -28,6 +31,14 @@ export function reducer(state: StateType, action: ActionType): StateType {
         ...state,
         address,
         loggedIn: loggedIn,
+      };
+    }
+    case 'ledgerLogin': {
+      const { ledgerLogin } = action;
+      setItem('ledgerLogin', ledgerLogin);
+      return {
+        ...state,
+        ledgerLogin,
       };
     }
 
@@ -50,14 +61,11 @@ export function reducer(state: StateType, action: ActionType): StateType {
       };
     }
 
-    case 'setBalance': {
-      const { balance } = action;
+    case 'setAccount': {
+      const { account } = action;
       return {
         ...state,
-        account: {
-          ...state.account,
-          balance: balance,
-        },
+        account,
       };
     }
 
@@ -101,6 +109,14 @@ export function reducer(state: StateType, action: ActionType): StateType {
       };
     }
 
+    case 'setMinDelegationAmount': {
+      const { minDelegationAmount } = action;
+      return {
+        ...state,
+        minDelegationAmount,
+      };
+    }
+
     case 'setTotalActiveStake': {
       const { totalActiveStake } = action;
       return {
@@ -117,6 +133,14 @@ export function reducer(state: StateType, action: ActionType): StateType {
       };
     }
 
+    case 'setLedgerAccount': {
+      const { ledgerAccount } = action;
+      return {
+        ...state,
+        ledgerAccount,
+      };
+    }
+
     case 'logout': {
       const { provider } = action;
       provider
@@ -125,6 +149,7 @@ export function reducer(state: StateType, action: ActionType): StateType {
         .catch(e => console.error('logout', e));
       removeItem('logged_in');
       removeItem('address');
+      removeItem('ledgerLogin');
       return initialState();
     }
 

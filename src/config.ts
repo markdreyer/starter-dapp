@@ -1,9 +1,13 @@
 import { object, string, boolean, InferType } from 'yup';
 import { DelegationManagerContractType, DelegationContractType } from './helpers/types';
 
+export const minDust: string = '5000000000000000'; // 0.005 EGLD
 export const decimals: number = 2;
 export const denomination: number = 18;
 export const genesisTokenSuply: number = 20000000;
+export const feesInEpoch: number = 0;
+export const stakePerNode: number = 2500;
+export const protocolSustainabilityRewards: number = 0.1;
 export const yearSettings = [
   { year: 1, maximumInflation: 0.1084513 },
   { year: 2, maximumInflation: 0.09703538 },

@@ -26,6 +26,7 @@ const Layout = ({ children, page }: { children: React.ReactNode; page: string })
     getBlsKeys,
     getNumUsers,
     getMetaData,
+    getDelegationManagerContractConfig,
   } = contractViews;
 
   const getContractOverviewType = (value: QueryResponse) => {
@@ -33,7 +34,6 @@ const Layout = ({ children, page }: { children: React.ReactNode; page: string })
       decimals,
       denomination,
       input: value.returnData[3].asBigInt.toFixed(),
-      showLastNonZeroDecimal: false,
     });
     return new ContractOverview(
       value.returnData[0].asHex.toString(),
@@ -41,7 +41,7 @@ const Layout = ({ children, page }: { children: React.ReactNode; page: string })
       value.returnData[2].asBigInt.toFixed(),
       initialOwnerFunds,
       value.returnData[4]?.asString,
-      value.returnData[5].asBool,
+      value.returnData[5]?.asBool,
       value.returnData[6].asBool,
       value.returnData[7]?.asString,
       value.returnData[8].asBool,
@@ -70,6 +70,7 @@ const Layout = ({ children, page }: { children: React.ReactNode; page: string })
       dapp.apiProvider.getNetworkStake(),
       dapp.proxy.getNetworkConfig(),
       dapp.proxy.getNetworkStatus(),
+      getDelegationManagerContractConfig(dapp),
     ])
       .then(
         ([
@@ -84,10 +85,15 @@ const Layout = ({ children, page }: { children: React.ReactNode; page: string })
           networkStake,
           networkConfig,
           networkStatus,
+          delegationManager,
         ]) => {
           dispatch({
             type: 'setNumUsers',
             numUsers: numUsers.returnData[0].asNumber,
+          });
+          dispatch({
+            type: 'setMinDelegationAmount',
+            minDelegationAmount: delegationManager.returnData[5].asNumber,
           });
           dispatch({
             type: 'setContractOverview',
@@ -112,7 +118,8 @@ const Layout = ({ children, page }: { children: React.ReactNode; page: string })
               networkConfig.RoundDuration,
               networkConfig.RoundsPerEpoch,
               networkStatus.RoundsPassedInCurrentEpoch,
-              new BigNumber(networkConfig.TopUpRewardsGradientPoint)
+              new BigNumber(networkConfig.TopUpRewardsGradientPoint),
+              networkConfig.ChainID
             ),
           });
           dispatch({
@@ -124,7 +131,8 @@ const Layout = ({ children, page }: { children: React.ReactNode; page: string })
                 networkConfig.RoundDuration,
                 networkConfig.RoundsPerEpoch,
                 networkStatus.RoundsPassedInCurrentEpoch,
-                new BigNumber(networkConfig.TopUpRewardsGradientPoint)
+                new BigNumber(networkConfig.TopUpRewardsGradientPoint),
+                networkConfig.ChainID
               ),
               networkStake: new NetworkStake(
                 networkStake.TotalValidators,
@@ -139,7 +147,7 @@ const Layout = ({ children, page }: { children: React.ReactNode; page: string })
         }
       )
       .catch(e => {
-        console.log('To do ', e);
+        console.error('To do ', e);
       });
   }, []);
 

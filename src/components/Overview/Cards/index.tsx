@@ -61,7 +61,6 @@ const Views = () => {
           input: totalActiveStake,
           denomination,
           decimals,
-          showLastNonZeroDecimal: false,
         })}
         valueUnit={egldLabel}
         color="orange"
@@ -71,13 +70,11 @@ const Views = () => {
             input: totalActiveStake,
             denomination,
             decimals,
-            showLastNonZeroDecimal: false,
           }),
           denominate({
             input: networkStake.TotalStaked.toFixed(),
             denomination,
             decimals,
-            showLastNonZeroDecimal: false,
           })
         )}% of total stake`}
       />
@@ -100,7 +97,7 @@ const Views = () => {
         color="orange"
         svg="leaf-solid.svg"
         percentage="Annual percentage rate"
-        tooltipText="This is an aproximate APR calculation for this year based on the current epoch"
+        tooltipText="This is an approximate APR calculation for this year based on the current epoch"
       />
       <StatCard
         title="Service Fee"
@@ -120,7 +117,6 @@ const Views = () => {
               decimals,
               denomination,
               input: contractOverview.maxDelegationCap,
-              showLastNonZeroDecimal: false,
             }) || ''
           }
           valueUnit={egldLabel}
@@ -131,19 +127,18 @@ const Views = () => {
               input: totalActiveStake,
               denomination,
               decimals,
-              showLastNonZeroDecimal: false,
             }),
             denominate({
               decimals,
               denomination,
               input: contractOverview.maxDelegationCap,
-              showLastNonZeroDecimal: false,
             })
           )}% filled`}
         >
           <UpdateDelegationCapAction />
         </StatCard>
       ) : (
+<<<<<<< HEAD:src/components/Overview/Cards/index.tsx
           denominate({
             decimals,
             denomination,
@@ -186,6 +181,45 @@ const Views = () => {
             ></StatCard>
           )
         )}
+=======
+        denominate({
+          decimals,
+          denomination,
+          input: contractOverview.maxDelegationCap,
+        }) !== '0' &&
+        denominate({
+          decimals,
+          denomination,
+          input: contractOverview.maxDelegationCap,
+        }) !== '' && (
+          <StatCard
+            title="Delegation Cap"
+            value={
+              denominate({
+                decimals,
+                denomination,
+                input: contractOverview.maxDelegationCap,
+              }) || ''
+            }
+            valueUnit={egldLabel}
+            color="green"
+            svg="delegation.svg"
+            percentage={`${getPercentage(
+              denominate({
+                input: totalActiveStake,
+                denomination,
+                decimals,
+              }),
+              denominate({
+                decimals,
+                denomination,
+                input: contractOverview.maxDelegationCap,
+              })
+            )}% filled`}
+          ></StatCard>
+        )
+      )}
+>>>>>>> upstream/master:react-delegationdashboard/src/components/Overview/Cards/index.tsx
 
       {isAdmin() && location.pathname === '/owner' && (
         <StatCard

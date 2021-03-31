@@ -5,12 +5,6 @@ export interface AccountType {
   code?: string;
 }
 
-export interface DelegationManagerContractType {
-  name: string;
-  gasLimit: number;
-  data: string;
-}
-
 export interface DelegationContractType {
   name: string;
   gasLimit: number;

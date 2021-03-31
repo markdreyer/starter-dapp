@@ -13,24 +13,27 @@ import {
 } from '@elrondnetwork/erdjs';
 import { setItem } from '../storage/session';
 import { delegationManagerContractData } from '../config';
+import { NetworkConfig } from '../helpers/contractDataDefinitions';
 
 class DelegationManager {
     contract: SmartContract;
     proxyProvider: ProxyProvider;
     signerProvider?: IDappProvider;
+    networkConfig: NetworkConfig;
 
-    constructor(provider: ProxyProvider, delegationManagerContract?: string, signer?: IDappProvider) {
+    constructor(provider: ProxyProvider, delegationManagerContract?: string, signer?: IDappProvider, networkConfig: NetworkConfig) {
         const address = new Address(delegationManagerContract);
         this.contract = new SmartContract({ address });
         this.proxyProvider = provider;
         this.signerProvider = signer;
+        this.networkConfig = networkConfig;
     }
 
     async sendTransaction(
         value: string,
         transcationType: string,
         args: string = ''
-    ): Promise<boolean> {
+    ): Promise<Transaction> {
         if (!this.signerProvider) {
             throw new Error(
                 'You need a singer to send a transaction, use either WalletProvider or LedgerProvider'
@@ -48,14 +51,14 @@ class DelegationManager {
                 console.warn('invalid signerProvider');
         }
 
-        return true;
+        throw new Error('invalid signerProvider');
     }
 
     private async sendTransactionBasedOnType(
         value: string,
         transcationType: string,
         args: string = ''
-    ): Promise<boolean> {
+    ): Promise<Transaction> {
         let delegationManagerContract = delegationManagerContractData.find(d => d.name === transcationType);
         if (!delegationManagerContract) {
             throw new Error('The contract for this action in not defined');
@@ -69,6 +72,7 @@ class DelegationManager {
                 .setFunction(func)
                 .build();
             let transaction = new Transaction({
+                chainID: this.networkConfig.chainId,
                 receiver: this.contract.getAddress(),
                 value: Balance.eGLD(value),
                 gasLimit: new GasLimit(delegationManagerContract.gasLimit),
@@ -76,9 +80,9 @@ class DelegationManager {
             });
 
             // @ts-ignore
-            await this.signerProvider.sendTransaction(transaction);
+            let result = await this.signerProvider.sendTransaction(transaction);
 
-            return true;
+            return result;
         }
     }
 }

@@ -19,9 +19,9 @@ class DelegationManager {
     contract: SmartContract;
     proxyProvider: ProxyProvider;
     signerProvider?: IDappProvider;
-    networkConfig: NetworkConfig;
+    networkConfig?: NetworkConfig;
 
-    constructor(provider: ProxyProvider, delegationManagerContract?: string, signer?: IDappProvider, networkConfig: NetworkConfig) {
+    constructor(provider: ProxyProvider, delegationManagerContract?: string, signer?: IDappProvider, networkConfig?: NetworkConfig) {
         const address = new Address(delegationManagerContract);
         this.contract = new SmartContract({ address });
         this.proxyProvider = provider;
@@ -72,7 +72,7 @@ class DelegationManager {
                 .setFunction(func)
                 .build();
             let transaction = new Transaction({
-                chainID: this.networkConfig.chainId,
+                chainID: this.networkConfig?.chainId,
                 receiver: this.contract.getAddress(),
                 value: Balance.eGLD(value),
                 gasLimit: new GasLimit(delegationManagerContract.gasLimit),

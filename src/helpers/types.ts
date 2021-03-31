@@ -30,3 +30,9 @@ export interface ActionModalType {
   handleClose: () => void;
   handleContinue: (value: string) => void;
 }
+
+export interface DelegationManagerContractType {
+  name: string;
+  gasLimit: number;
+  data: string;
+}

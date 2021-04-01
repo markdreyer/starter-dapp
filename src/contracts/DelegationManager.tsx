@@ -13,20 +13,28 @@ import {
 } from '@elrondnetwork/erdjs';
 import { setItem } from '../storage/session';
 import { delegationManagerContractData } from '../config';
-import { NetworkConfig } from '../helpers/contractDataDefinitions';
+import { AccountType, NetworkConfig } from '../helpers/contractDataDefinitions';
 
 class DelegationManager {
     contract: SmartContract;
     proxyProvider: ProxyProvider;
     signerProvider?: IDappProvider;
     networkConfig?: NetworkConfig;
+    account?: AccountType;
 
-    constructor(provider: ProxyProvider, delegationManagerContract?: string, signer?: IDappProvider, networkConfig?: NetworkConfig) {
+    constructor(
+        provider: ProxyProvider,
+        delegationManagerContract?: string,
+        signer?: IDappProvider,
+        networkConfig?: NetworkConfig,
+        account?: AccountType
+        ) {
         const address = new Address(delegationManagerContract);
         this.contract = new SmartContract({ address });
         this.proxyProvider = provider;
         this.signerProvider = signer;
         this.networkConfig = networkConfig;
+        this.account = account;
     }
 
     async sendTransaction(
@@ -77,6 +85,7 @@ class DelegationManager {
                 value: Balance.eGLD(value),
                 gasLimit: new GasLimit(delegationManagerContract.gasLimit),
                 data: payload,
+                nonce: this.account?.nonce,
             });
 
             // @ts-ignore

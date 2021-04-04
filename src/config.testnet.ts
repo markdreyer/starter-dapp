@@ -36,7 +36,7 @@ export const network: NetworkType = {
   apiAddress: 'https://testnet-api.elrond.com',
   gatewayAddress: 'https://testnet-gateway.elrond.com',
   explorerAddress: 'https://testnet-explorer.elrond.com/',
-  delegationContract: 'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqehllllswleld8',
+  delegationContract: 'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqf8llllswuedva',
 };
 
 const networkSchema = object({

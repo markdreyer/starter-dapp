@@ -115,7 +115,25 @@ export class DelegationTransactionType {
     value: string = '',
     type: string,
     args: string = '',
-    chainId: ChainID = new ChainID('T')
+    chainId: ChainID = new ChainID('1')
+  ) {
+    this.value = value;
+    this.type = type;
+    this.args = args;
+    this.chainId = chainId;
+  }
+}
+
+export class DelegationManagerTransactionType {
+  value: string;
+  type: string;
+  chainId?: ChainID;
+  args?: string;
+  public constructor(
+    value: string = '',
+    type: string,
+    args: string = '',
+    chainId: ChainID = new ChainID('1')
   ) {
     this.value = value;
     this.type = type;

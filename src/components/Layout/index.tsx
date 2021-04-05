@@ -89,7 +89,7 @@ const Layout = ({ children, page }: { children: React.ReactNode; page: string })
         ]) => {
           dispatch({
             type: 'setNumUsers',
-            numUsers: numUsers.returnData[0].asNumber,
+            numUsers: numUsers.returnData.length > 0 ? numUsers.returnData[0].asNumber : 0,
           });
           dispatch({
             type: 'setMinDelegationAmount',

@@ -28,7 +28,7 @@ class DelegationManager {
         signer?: IDappProvider,
         networkConfig?: NetworkConfig,
         account?: AccountType
-        ) {
+    ) {
         const address = new Address(delegationManagerContract);
         this.contract = new SmartContract({ address });
         this.proxyProvider = provider;

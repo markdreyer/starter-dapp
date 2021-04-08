@@ -25,25 +25,25 @@ const Home = () => {
       ) : loading ? (
         <State icon={faCircleNotch} iconClass="fa-spin text-primary" />
       ) : (
-        <div className="m-auto login-container">
-          <div className="card my-spacer text-center">
-            <div className="card-body p-spacer mx-lg-spacer">
-              <Logo className="logo mb-spacer" />
-              <h4 className="mb-spacer">Elrond Delegation Manager</h4>
-              <p className="lead mb-spacer">
-                Delegate Elrond ({egldLabel}) and earn up to 25% APY!
+              <div className="m-auto login-container">
+                <div className="card my-spacer text-center">
+                  <div className="card-body p-spacer mx-lg-spacer">
+                    <Logo className="logo mb-spacer" />
+                    <h4 className="mb-spacer">RisaSoft Staking</h4>
+                    <p className="lead mb-spacer">
+                      Stake with us and earn up to 25% APY!
               </p>
-              <p className="mb-spacer">Please select your login method:</p>
-              <div>
-                <a href="/ledger" className="btn btn-primary px-sm-spacer mx-1 mx-sm-3">
-                  Ledger
+                    <p className="mb-spacer">Please select your login method:</p>
+                    <div>
+                      <a href="/ledger" className="btn btn-primary px-sm-spacer mx-1 mx-sm-3">
+                        Ledger
                 </a>
-                <WalletLogin />
+                      <WalletLogin />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+            )}
     </div>
   );
 };

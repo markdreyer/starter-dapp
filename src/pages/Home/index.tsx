@@ -31,7 +31,7 @@ const Home = () => {
                     <Logo className="logo mb-spacer" />
                     <h4 className="mb-spacer">RisaSoft Staking</h4>
                     <p className="lead mb-spacer">
-                      Stake with us and earn up to 25% APY!
+                      Stake with us and earn up to 22% APY!
               </p>
                     <p className="mb-spacer">Please select your login method:</p>
                     <div>

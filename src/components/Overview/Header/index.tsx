@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Address } from '@elrondnetwork/erdjs/out';
+import { Address } from '@elrondnetwork/erdjs';
 import { useContext, useDispatch } from 'context';
 import SetAgencyMetaDataModal from './SetAgencyMetaDataModal';
 import NewDelegationContractAction from '../Cards/NewDelegationContractAction';
@@ -9,11 +9,22 @@ import { getItem } from 'storage/session';
 const Header = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const { address, delegationContract, contractOverview, ledgerAccount } = useContext();
+  const {
+    address,
+    delegationContract,
+    contractOverview,
+    ledgerAccount,
+    walletConnectAccount,
+  } = useContext();
 
-  const isAdmin = () => {
+  const isOwner = () => {
     let loginAddress = new Address(address).hex();
     return loginAddress.localeCompare(contractOverview.ownerAddress) === 0;
+  };
+
+  const isOwnerPath = () => {
+    let currentURL = window.location.pathname;
+    return currentURL.includes('owner') === true;
   };
 
   const fetchLedger = () => {
@@ -28,7 +39,17 @@ const Header = () => {
       });
     }
   };
-  useEffect(fetchLedger, []);
+
+  const fetchWalletConnect = () => {
+    if (getItem('walletConnectLogin') && !walletConnectAccount) {
+      dispatch({
+        type: 'setWalletConnectAccount',
+        walletConnectAccount: address,
+      });
+    }
+  };
+  useEffect(fetchLedger, /* eslint-disable react-hooks/exhaustive-deps */[]);
+  useEffect(fetchWalletConnect, /* eslint-disable react-hooks/exhaustive-deps */[]);
 
   return (
     <div className="header card-header d-flex align-items-center border-0 justify-content-between px-spacer">
@@ -37,10 +58,8 @@ const Header = () => {
         <span className="text-truncate">{delegationContract}</span>
       </div>
       <div className="d-flex justify-content-center align-items-center justify-content-between">
-
         <NewDelegationContractAction />
-
-        {isAdmin() && pathname !== '/owner' ? (
+        {isOwner() && !isOwnerPath() ? (
           <Link to="/owner" className="btn btn-primary btn-sm">
             Admin
           </Link>
@@ -50,7 +69,7 @@ const Header = () => {
             Dashboard
           </Link>
         ) : null}
-        {isAdmin() && pathname == '/owner' ? <SetAgencyMetaDataModal /> : null}
+        {isOwner() && isOwnerPath() ? <SetAgencyMetaDataModal /> : null}
       </div>
     </div>
   );

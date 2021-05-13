@@ -1,5 +1,6 @@
-import { object, string, boolean, InferType } from 'yup';
+import { object, string, InferType } from 'yup';
 import { DelegationManagerContractType, DelegationContractType } from './helpers/types';
+import { DelegationContractType } from './helpers/types';
 
 export const minDust: string = '5000000000000000'; // 0.005 EGLD
 export const decimals: number = 2;
@@ -27,6 +28,7 @@ export const stakingContract: string =
   'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqllls0lczs7';
 export const delegationManagerContract: string =
   'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqylllslmq6y6';
+export const walletConnectBridge: string = 'https://bridge.walletconnect.org';
 
 export const network: NetworkType = {
   id: 'testnet',

@@ -5,6 +5,7 @@ import { ReactComponent as Logo } from 'assets/images/logo.svg';
 import State from 'components/State';
 import { useContext } from 'context';
 import WalletLogin from './Login/Wallet';
+import WalletConnectLogin from './Login/WalletConnect';
 
 const Home = () => {
   const { loading, error, loggedIn, egldLabel } = useContext();
@@ -39,6 +40,7 @@ const Home = () => {
                         Ledger
                 </a>
                       <WalletLogin />
+                      <WalletConnectLogin />
                     </div>
                   </div>
                 </div>

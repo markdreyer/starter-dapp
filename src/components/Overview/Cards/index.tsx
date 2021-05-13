@@ -3,7 +3,7 @@ import { decimals, denomination } from 'config';
 import { useContext } from 'context';
 import denominate from 'components/Denominate/formatters';
 import StatCard from 'components/StatCard';
-import { Address, NetworkStake } from '@elrondnetwork/erdjs/out';
+import { Address, NetworkStake } from '@elrondnetwork/erdjs';
 import { useState } from 'react';
 
 import SetPercentageFeeAction from './SetPercentageFeeAction';
@@ -33,9 +33,14 @@ const Views = () => {
     return percentage ? percentage.toFixed(2) : '...';
   };
 
-  const isAdmin = () => {
+  const isOwner = () => {
     let loginAddress = new Address(address).hex();
     return loginAddress.localeCompare(contractOverview.ownerAddress) === 0;
+  };
+
+  const isOwnerPath = () => {
+    let currentURL = window.location.pathname;
+    return currentURL.includes('owner') === true;
   };
 
   const getNetworkStake = () => {
@@ -49,9 +54,12 @@ const Views = () => {
       });
   };
 
-  React.useEffect(() => {
-    getNetworkStake();
-  }, []);
+  React.useEffect(
+    () => {
+      getNetworkStake();
+    },
+    /* eslint-disable react-hooks/exhaustive-deps */ []
+  );
 
   return (
     <div className="cards d-flex flex-wrap mr-spacer">
@@ -96,7 +104,7 @@ const Views = () => {
         valueUnit=""
         color="orange"
         svg="leaf-solid.svg"
-        percentage="Annual percentage rate"
+        percentage="Annual percentage rate incl. service fee"
         tooltipText="This is an approximate APR calculation for this year based on the current epoch"
       />
       <StatCard
@@ -106,9 +114,9 @@ const Views = () => {
         color="red"
         svg="service.svg"
       >
-        {location.pathname === '/owner' && <SetPercentageFeeAction />}
+        {isOwnerPath() && <SetPercentageFeeAction />}
       </StatCard>
-      {isAdmin() && location.pathname === '/owner' ? (
+      {isOwner() && isOwnerPath() ? (
         <StatCard
           title="Delegation Cap"
           value={
@@ -175,7 +183,7 @@ const Views = () => {
         )
       )}
 
-      {isAdmin() && location.pathname === '/owner' && (
+      {isOwner() && isOwnerPath() && (
         <StatCard
           title="Automatic activation"
           value={contractOverview.automaticActivation === 'true' ? 'ON' : 'OFF'}
@@ -185,7 +193,7 @@ const Views = () => {
           <AutomaticActivationAction automaticFlag={contractOverview.automaticActivation} />
         </StatCard>
       )}
-      {isAdmin() && location.pathname === '/owner' && (
+      {isOwner() && isOwnerPath() && (
         <StatCard
           title="ReDelegate Cap"
           value={contractOverview.reDelegationCap === 'true' ? 'ON' : 'OFF'}

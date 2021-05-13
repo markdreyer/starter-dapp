@@ -82,7 +82,7 @@ class DelegationManager {
             let transaction = new Transaction({
                 chainID: this.networkConfig?.chainId,
                 receiver: this.contract.getAddress(),
-                value: Balance.eGLD(value),
+                value: Balance.egld(value),
                 gasLimit: new GasLimit(delegationManagerContract.gasLimit),
                 data: payload,
                 nonce: this.account?.nonce,

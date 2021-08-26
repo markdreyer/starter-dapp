@@ -32,7 +32,7 @@ const Home = () => {
                     <Logo className="logo mb-spacer" />
                     <h4 className="mb-spacer">RisaSoft Staking</h4>
                     <p className="lead mb-spacer">
-                      Stake with us and earn up to 20% APR!
+                    Help secure the Elrond blockchain and earn 13% - 16% APR on your eGLD when you delegate to us. All delegations are non-custodial so you remain in control of your digital assets. Running on our best in class US-based IT infrastructure ensures minimal downtime and maximum rewards.
               </p>
                     <p className="mb-spacer">Please select your login method:</p>
                     <div>

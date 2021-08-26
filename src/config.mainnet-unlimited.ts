@@ -39,7 +39,8 @@ export const network: NetworkType = {
   apiAddress: 'https://api.elrond.com',
   gatewayAddress: 'https://gateway.elrond.com',
   explorerAddress: 'https://explorer.elrond.com/',
-  delegationContract: 'TODO: add DC address',
+  // TODO: replace with real DC address
+  delegationContract: 'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqthllllsy5r6rh',
 };
 
 const networkSchema = object({
